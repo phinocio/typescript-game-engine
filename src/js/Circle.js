@@ -1,0 +1,51 @@
+export default class Circle
+{
+	/**
+	 * Initialize the attributes of the circle.
+	 * @param {object} context 
+	 * @param {number} x - The starting X position.
+	 * @param {number} y - The starting y position.
+	 * @param {number} r - The radius of the circle.
+	 * @param {number} sDegree - The starting degree of the circle.
+	 * @param {number} eDegree - The ending degree of the circle (Math.PI * 2).
+	 * @param {number} dx - The x velocity of the circle.
+	 * @param {number} dy - The y velocity of the circle.
+	 * @param {boolean} counterClockwise - Whether the circle is counter clockwise or not.
+	 */
+	constructor(context, x, y, r, sDegree, eDegree, dx, dy, counterClockwise = false)
+	{
+		this.ctx = context;
+		this.x = x;
+		this.dx = dx;
+		this.y = y;
+		this.dy = dy;
+		this.r = r;
+		this.s = sDegree;
+		this.e = eDegree;
+		this.cc = counterClockwise;
+	}
+
+	Draw()
+	{
+		this.ctx.beginPath();
+		this.ctx.arc(this.x, this.y, this.r, this.s, this.e, this.cc);
+		this.ctx.strokeStyle = '#000000';
+		this.ctx.stroke();
+	}
+
+	Update()
+	{
+		if(this.x + this.r > innerWidth || this.x - this.r < 0)
+		{
+			this.dx = -this.dx;
+		}
+
+		if(this.y + this.r > innerHeight || this.y - this.r < 0)
+		{
+			this.dy = -this.dy;
+		}
+
+		this.x += this.dx;
+		this.y += this.dy;
+	}
+}
