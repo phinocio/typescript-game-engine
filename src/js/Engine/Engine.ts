@@ -8,7 +8,7 @@ import Scene from "../Scenes/Scene";
  */
 class Engine
 {
-	private currentScene: Scene;
+	private currentScene!: Scene;
 	public running: boolean;
 
 	/**
@@ -23,7 +23,7 @@ class Engine
 	 * Loads a scene, destroying the current in in the process if it exists.
 	 * @param scene - The scene to load.
 	 */
-	public LoadScene(scene: Scene)
+	public LoadScene(scene: Scene): void
 	{
 		if (typeof this.currentScene !== 'undefined')
 		{
@@ -34,12 +34,12 @@ class Engine
 		this.currentScene.DrawCanvas();
 	}
 
-	public Render()
+	public Render(): void
 	{
 		this.currentScene.Render();
 	}
 
-	public Update()
+	public Update(): void
 	{
 		this.currentScene.Update();
 	}
@@ -48,11 +48,13 @@ class Engine
 	 * Removes the old scene from the DOM when LoadScene() is called.
 	 * @param scene - The scene to remove from the DOM.
 	 */
-	private Destroy(scene: Scene)
+	private Destroy(scene: Scene): void
 	{
 		let x = document.getElementById(scene.sceneName);
-		x.remove();
-		scene = null;
+		if (x !== null)
+		{
+			x.remove();
+		}
 	}
 }
 

@@ -23,9 +23,8 @@ abstract class Scene
 		this.sceneName = sceneName;
 	}
 
-	public Draw(){}
-
-	public DrawCanvas(){
+	public DrawCanvas(): void
+	{
 		let canvas = document.createElement('canvas');
 		canvas.id = this.sceneName;
 		canvas.height = this.height;
@@ -33,8 +32,8 @@ abstract class Scene
 		document.body.appendChild(canvas);
 	}
 
-	public Render(){}
-	public Update(){}
+	abstract Render(): void;
+	abstract Update(): void;
 }
 
 export default Scene;

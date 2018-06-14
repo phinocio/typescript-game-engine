@@ -44,11 +44,6 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/, 
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			},
-			{
 				test: /\.(sa|sc|c)ss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
@@ -65,7 +60,7 @@ module.exports = {
 			},
 			{
 				test: /\.tsx?$/,
-				use: 'ts-loader',
+				use: 'babel-loader',
 				exclude: /node_modules/
 			}
 		]

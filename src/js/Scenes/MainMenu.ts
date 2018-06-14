@@ -13,9 +13,14 @@ class MainMenu extends Scene
 		super("MainMenu");
 	}
 
-	public Render()
+	public Render(): void
 	{
 		
+	}
+
+	public Update(): void
+	{
+
 	}
 }
 
