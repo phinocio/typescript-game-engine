@@ -1,8 +1,19 @@
 html, body 
 {
 	margin: 0;
+	padding: 0;
+	background: black;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 canvas {
 	border: 1px solid black;
+	margin: 0;
+	padding: 0;
+	background: grey;
 }

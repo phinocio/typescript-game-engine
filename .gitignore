@@ -1,4 +1,3 @@
-/node_modules/
-/dist/js/
-/dist/css/
-/.vscode/
+node_modules/
+dist/js/
+dist/css

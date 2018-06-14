@@ -29,23 +29,23 @@ export default class Circle
 	{
 		this.ctx.beginPath();
 		this.ctx.arc(this.x, this.y, this.r, this.s, this.e, this.cc);
-		this.ctx.strokeStyle = '#000000';
-		this.ctx.stroke();
 	}
 
-	Update()
+	Update(canvas)
 	{
-		if(this.x + this.r > innerWidth || this.x - this.r < 0)
-		{
+		this.CheckBounds(canvas);
+		this.x += this.dx;
+		this.y += this.dy;
+	}
+
+	CheckBounds(canvas)
+	{
+		if (this.x + this.r > canvas.width || this.x - this.r < 0) {
 			this.dx = -this.dx;
 		}
 
-		if(this.y + this.r > innerHeight || this.y - this.r < 0)
-		{
+		if (this.y + this.r > canvas.height || this.y - this.r < 0) {
 			this.dy = -this.dy;
 		}
-
-		this.x += this.dx;
-		this.y += this.dy;
 	}
 }

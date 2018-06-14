@@ -8,10 +8,11 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
 	entry: {
 		app: [
-			'./src/js/app.js',
+			'./src/js/app.ts',
 			'./src/scss/app.scss'
 		]
 	},
+	devtool: 'inline-source-map',
 	output: {
 		path: __dirname + '/dist/',
 		filename: 'js/[name].js'
@@ -61,7 +62,15 @@ module.exports = {
 				options: {
 					limit: 10000
 				}
+			},
+			{
+				test: /\.tsx?$/,
+				use: 'ts-loader',
+				exclude: /node_modules/
 			}
 		]
-	}
-}
+	},
+	resolve: {
+		extensions: ['.tsx', '.ts', '.js']
+	},
+};
