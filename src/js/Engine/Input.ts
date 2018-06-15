@@ -1,23 +1,22 @@
 /**
- * Singleton class Input to handle input for the Engine.
+ * Singleton class Input for handling input for the game.
  * @class Input
  * @param {Input} instance - The instance of the Singleton.
- * @param {boolean} input_up - Whether the up key is pressed.
- * @param {boolean} input_right - Whether the right key is pressed.
- * @param {boolean} input_down - Whether the down key is pressed.
- * @param {boolean} input_left - Whether the let key is pressed.
+ * @param {Map} keyMap - Mapping of keys for if they're pressed (true) or not (false).
  */
-class Input
+class Input 
 {
 	private static instance: Input;
-	private input_up: boolean = false;
-	private input_right: boolean = false;
-	private input_down: boolean = false;
-	private input_left: boolean = false;
+	private keyMap: Map<string, boolean>;
+
+	constructor() 
+	{
+		this.keyMap = new Map<string, boolean>();
+	}
 
 	static GetInstance(): Input
 	{
-		if (!Input.instance) 
+		if (!Input.instance)
 		{
 			Input.instance = new Input();
 		}
@@ -26,63 +25,29 @@ class Input
 
 	public GetInput(): void
 	{
-		document.addEventListener('keydown', event => {
-			switch(event.key)
-			{
-				case "w" || "ArrowUp":
-					this.input_up = true;
-					break;
-				case "d" || "ArrowRight":
-					this.input_right = true;
-					break;
-				case "s" || "ArrowDown":
-					this.input_down = true;
-					break;
-				case "a" || "ArrowLeft":
-					this.input_left = true;
-					break;
-			}
-		
-		});
-
-		document.addEventListener('keyup', event => {
-			switch (event.key) 
-			{
-				case "w" || "ArrowUp":
-					this.input_up = false;
-					break;
-				case "d" || "ArrowRight":
-					this.input_right = false;
-					break;
-				case "s" || "ArrowDown":
-					this.input_down = false;
-					break;
-				case "a" || "ArrowLeft":
-					this.input_left = false;
-					break;
-			}
-		});
+		document.addEventListener('keydown', event => this.keyMap.set(event.key, true));
+		document.addEventListener('keyup', event => this.keyMap.set(event.key, false));
 	}
 
-	public Up(): boolean
+	public Up(): boolean 
 	{
-		return this.input_up;
+		return this.keyMap.get("w") || this.keyMap.get("ArrowUp") || false;
 	}
 
-	public Right(): boolean
+	public Right(): boolean 
 	{
-		return this.input_right;
+		return this.keyMap.get("d") || this.keyMap.get("ArrowRight") || false;
 	}
 
-	public Down(): boolean
+	public Down(): boolean 
 	{
-		return this.input_down;
+		return this.keyMap.get("s") || this.keyMap.get("ArrowDown") || false;
 	}
 
-	public Left(): boolean
+	public Left(): boolean 
 	{
-		return this.input_left
+		return this.keyMap.get("a") || this.keyMap.get("ArrowLeft") || false;
 	}
 }
 
-export default Input;	
+export default Input;
