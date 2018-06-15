@@ -1,14 +1,16 @@
 import Scene from "../Scenes/Scene";
+import Input from './Input';
 
 /**
  * Engine class to control the game and switch between scenes.
  * @class Engine
- * @param currentScene - Stores the canvas.
- * @param running - Boolean value of if the game is running or not.
+ * @param {Scene} currentScene - Stores the canvas.
+ * @param {boolean} running - Boolean value of if the game is running or not.
  */
 class Engine
 {
 	private currentScene!: Scene;
+	private input: Input;
 	public running: boolean;
 
 	/**
@@ -17,6 +19,7 @@ class Engine
 	constructor()
 	{
 		this.running = true;
+		this.input = Input.GetInstance();
 	}
 
 	/**
@@ -34,14 +37,33 @@ class Engine
 		this.currentScene.DrawCanvas();
 	}
 
-	public Render(): void
+	private Input(): void
+	{
+		this.input.GetInput();
+	}
+
+	private Render(): void
 	{
 		this.currentScene.Render();
 	}
 
-	public Update(): void
+	private Update(): void
 	{
 		this.currentScene.Update();
+	}
+
+	public GameLoop(): void
+	{
+		if (this.running) // Also need a thing to check for pause menu or w/e
+		{
+			requestAnimationFrame(() => this.GameLoop());
+			this.currentScene.ClearCanvas();
+			this.Input();
+			this.Update();
+			this.Render();
+		} else {
+			this.Input(); // If the game is paused, still check for input.
+		}
 	}
 
 	/**
@@ -50,10 +72,10 @@ class Engine
 	 */
 	private Destroy(scene: Scene): void
 	{
-		let x = document.getElementById(scene.sceneName);
-		if (x !== null)
+		let scn = document.getElementById(scene.sceneName);
+		if (scn !== null)
 		{
-			x.remove();
+			scn.remove();
 		}
 	}
 }

@@ -2,6 +2,7 @@ export default class Circle
 {
 	/**
 	 * Initialize the attributes of the circle.
+	 * @constructor
 	 * @param {object} context 
 	 * @param {number} x - The starting X position.
 	 * @param {number} y - The starting y position.
