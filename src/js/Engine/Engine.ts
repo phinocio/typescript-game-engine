@@ -1,5 +1,5 @@
-import Input from './Input';
 import Scene from '../Scenes/Scene';
+import Input from './Input';
 
 /**
  * Engine class to control the game and switch between scenes.
@@ -9,9 +9,9 @@ import Scene from '../Scenes/Scene';
  */
 class Engine
 {
+	public running: boolean;
 	private currentScene!: Scene;
 	private input: Input;
-	public running: boolean;
 
 	/**
 	 * @constructor
@@ -20,7 +20,6 @@ class Engine
 	{
 		this.running = true;
 		this.input = Input.GetInstance	();
-		console.log();
 	}
 
 	/**
@@ -38,6 +37,18 @@ class Engine
 		this.currentScene.DrawCanvas();
 	}
 
+	public GameLoop(): void {
+		if (this.running) {
+			requestAnimationFrame(() => this.GameLoop());
+			this.currentScene.ClearCanvas();
+			this.Input();
+			this.Update();
+			this.Render();
+		} else {
+			this.Input(); // If the game is paused, still check for input, do be able to unpause for example.
+		}
+	}
+
 	private Input(): void
 	{
 		this.input.GetInput();
@@ -53,32 +64,18 @@ class Engine
 		this.currentScene.Update();
 	}
 
-	public GameLoop(): void
-	{
-		if (this.running)
-		{
-			requestAnimationFrame(() => this.GameLoop());
-			this.currentScene.ClearCanvas();
-			this.Input();
-			this.Update();
-			this.Render();
-		} else {
-			this.Input(); // If the game is paused, still check for input.
-		}
-	}
-
 	/**
 	 * Removes the old scene from the DOM when LoadScene() is called.
 	 * @param scene - The scene to remove from the DOM.
 	 */
 	private Destroy(scene: Scene): void
 	{
-		let scn = document.getElementById(scene.sceneName);
+		const scn = document.getElementById(scene.sceneName);
 		if (scn !== null)
 		{
 			scn.remove();
-		} 
-		else 
+		}
+		else
 		{
 			// *Shouldn't* happen, but just in case...
 			throw new TypeError('Variable scn cannot be null! From: ' + scene.sceneName);

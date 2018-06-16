@@ -14,7 +14,7 @@ class Input
 		this.keyMap = new Map<string, boolean>();
 	}
 
-	public GetInstance(): Input
+	public static GetInstance(): Input
 	{
 		if (!Input.instance)
 		{

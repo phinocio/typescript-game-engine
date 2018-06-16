@@ -1,11 +1,10 @@
-import {CANVAS_HEIGHT, CANVAS_WIDTH} from '../../Config/Config';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../Config/Config';
 import GeometricShape from './GeometricShape';
 
 class Circle extends GeometricShape
 {
 
 	public radius: number;
-	public speed: number;
 
 	constructor(
 		context: CanvasRenderingContext2D,
@@ -40,7 +39,7 @@ class Circle extends GeometricShape
 
 	public Update(): void
 	{
-		this.GetInput();
+		super.GetInput();
 		this.CheckBounds();
 		this.pos.x += this.vel.x;
 		this.pos.y += this.vel.y;
@@ -48,35 +47,26 @@ class Circle extends GeometricShape
 		this.vel.y = 0;
 	}
 
-	public GetInput(): void
+	protected CheckBounds(): void
 	{
-		if (this.input.Up())
+		if (this.pos.y + this.radius < 0)
 		{
-			this.vel.y = -this.speed;
+			this.pos.y = CANVAS_HEIGHT + this.radius;
 		}
 
-		if (this.input.Right())
+		if (this.pos.x - this.radius > CANVAS_WIDTH)
 		{
-			this.vel.x = this.speed;
+			this.pos.x = 0 - this.radius;
 		}
 
-		if (this.input.Down())
+		if (this.pos.y - this.radius > CANVAS_HEIGHT)
 		{
-			this.vel.y = this.speed;
+			this.pos.y = 0 - this.radius;
 		}
 
-		if (this.input.Left())
+		if (this.pos.x + this.radius < 0)
 		{
-			this.vel.x = -this.speed;
-		}
-	}
-
-	public CheckBounds(): void
-	{
-		if (this.pos.y - this.radius < 0)
-		{
-			this.pos.y = CANVAS_HEIGHT - this.radius;
-			console.log('hi');
+			this.pos.x = CANVAS_WIDTH + this.radius;
 		}
 	}
 }

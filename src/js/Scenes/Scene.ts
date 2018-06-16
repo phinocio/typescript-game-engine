@@ -1,4 +1,4 @@
-import {CANVAS_HEIGHT, CANVAS_WIDTH} from '../Config/Config';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../Config/Config';
 
 /**
  * Abstract scene class that all scenes will inherit from.
@@ -11,7 +11,7 @@ import {CANVAS_HEIGHT, CANVAS_WIDTH} from '../Config/Config';
  */
 abstract class Scene
 {
-	protected sceneName: string;
+	public sceneName: string;
 	protected width: number;
 	protected height: number;
 	protected canvas: HTMLCanvasElement;

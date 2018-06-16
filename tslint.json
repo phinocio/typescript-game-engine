@@ -27,7 +27,7 @@
 		"triple-equals": true,
 		"cyclomatic-complexity": true,
 		"deprecated": true,
-		"linebreak-style": [true, "CR"],
+		"linebreak-style": [true, "LF"],
 		"max-classes-per-file": [true, 1],
 		"prefer-readonly": true,
 		"arrow-return-shorthand": true,
@@ -40,6 +40,12 @@
 		"quotemark": [true, "single"],
 		"trailing-comma": false,
 		"indent": [true, "tabs"],
+		"member-ordering": [
+			true,
+			{
+				"order": "fields-first"
+			}
+		],
 		"one-line": false,
 		"align": [
 			true,
@@ -50,7 +56,9 @@
 			true,
 			"check-branch",
 			"check-operator",
-			"check-typecast"
+			"check-typecast",
+			"check-module",
+			"check-seperator"
 		]
 	},
 	"rulesDirectory": []
