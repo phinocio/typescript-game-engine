@@ -1,5 +1,5 @@
-import Scene from "../Scenes/Scene";
 import Input from './Input';
+import Scene from '../Scenes/Scene';
 
 /**
  * Engine class to control the game and switch between scenes.
@@ -19,11 +19,12 @@ class Engine
 	constructor()
 	{
 		this.running = true;
-		this.input = Input.GetInstance();
+		this.input = Input.GetInstance	();
+		console.log();
 	}
 
 	/**
-	 * Loads a scene, destroying the current in in the process if it exists.
+	 * Loads a scene, destroying the current scene in the process if it exists.
 	 * @param scene - The scene to load.
 	 */
 	public LoadScene(scene: Scene): void
@@ -54,7 +55,7 @@ class Engine
 
 	public GameLoop(): void
 	{
-		if (this.running) // Also need a thing to check for pause menu or w/e
+		if (this.running)
 		{
 			requestAnimationFrame(() => this.GameLoop());
 			this.currentScene.ClearCanvas();
@@ -76,6 +77,11 @@ class Engine
 		if (scn !== null)
 		{
 			scn.remove();
+		} 
+		else 
+		{
+			// *Shouldn't* happen, but just in case...
+			throw new TypeError('Variable scn cannot be null! From: ' + scene.sceneName);
 		}
 	}
 }

@@ -1,15 +1,16 @@
 import Scene from './Scene';
 import Input from '../Engine/Input';
+import Circle from '../Engine/Drawing/Circle';
 
 /**
  * @class MainMenu
+ * @param {Input} input - The Input singleton to react to specfiic input options. 
  */
 class MainMenu extends Scene
 {	
 	private input: Input;
-	private x: number = 50;
-	private y: number = 50;
-	private speed: number = 5;
+	private c = new Circle(this.ctx!, 30, 50, 30, 'blue');
+
 	/**
 	 * @constructor
 	 */
@@ -21,28 +22,11 @@ class MainMenu extends Scene
 
 	public Update(): void
 	{
-		if (this.input.Up())
-		{
-			this.y -= this.speed;
-		}
-
-		if (this.input.Right()) {
-			this.x += this.speed;
-		}
-
-		if (this.input.Down()) {
-			this.y += this.speed;
-		}
-
-		if (this.input.Left()) {
-			this.x -= this.speed;
-		}
+		this.c.Update();
 	}
 
 	public Render(): void {
-		this.ctx!.beginPath();
-		this.ctx!.arc(this.x, this.y, 30, 0, Math.PI * 2);
-		this.ctx!.stroke();
+		this.c.Render();
 	}
 }
 

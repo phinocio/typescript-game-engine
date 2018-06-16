@@ -1,8 +1,8 @@
 import Engine from './Engine/Engine';
 import MainMenu from './Scenes/MainMenu';
 
-let e = new Engine();
-let m = new MainMenu();
+const e = new Engine();
+const m = new MainMenu();
 
 e.LoadScene(m);
 e.GameLoop();

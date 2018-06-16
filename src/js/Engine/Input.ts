@@ -4,17 +4,17 @@
  * @param {Input} instance - The instance of the Singleton.
  * @param {Map} keyMap - Mapping of keys for if they're pressed (true) or not (false).
  */
-class Input 
+class Input
 {
 	private static instance: Input;
 	private keyMap: Map<string, boolean>;
 
-	constructor() 
+	constructor()
 	{
 		this.keyMap = new Map<string, boolean>();
 	}
 
-	static GetInstance(): Input
+	public GetInstance(): Input
 	{
 		if (!Input.instance)
 		{
@@ -26,27 +26,27 @@ class Input
 	public GetInput(): void
 	{
 		document.addEventListener('keydown', event => this.keyMap.set(event.key, true));
-		document.addEventListener('keyup', event => this.keyMap.set(event.key, false));
+		document.addEventListener('keyup',   event => this.keyMap.set(event.key, false));
 	}
 
-	public Up(): boolean 
+	public Up(): boolean
 	{
-		return this.keyMap.get("w") || this.keyMap.get("ArrowUp") || false;
+		return this.keyMap.get('w') || this.keyMap.get('ArrowUp') || false;
 	}
 
-	public Right(): boolean 
+	public Right(): boolean
 	{
-		return this.keyMap.get("d") || this.keyMap.get("ArrowRight") || false;
+		return this.keyMap.get('d') || this.keyMap.get('ArrowRight') || false;
 	}
 
-	public Down(): boolean 
+	public Down(): boolean
 	{
-		return this.keyMap.get("s") || this.keyMap.get("ArrowDown") || false;
+		return this.keyMap.get('s') || this.keyMap.get('ArrowDown')  || false;
 	}
 
-	public Left(): boolean 
+	public Left(): boolean
 	{
-		return this.keyMap.get("a") || this.keyMap.get("ArrowLeft") || false;
+		return this.keyMap.get('a') || this.keyMap.get('ArrowLeft')  || false;
 	}
 }
 
