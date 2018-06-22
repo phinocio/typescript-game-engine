@@ -1,9 +1,8 @@
-import {assert} from 'chai';
+import { assert } from 'chai';
 
-describe('Number', () => { 
+describe('Number', () => {
 
 	it('is-a-number', () => {
 		assert.typeOf(1, 'number');
 	});
 });
-

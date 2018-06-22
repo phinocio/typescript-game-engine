@@ -7,7 +7,8 @@
 		"dev": "webpack --mode development",
 		"watch": "npm run dev -- --watch",
 		"tc": "tsc --noEmit",
-		"test": "mocha --require ts-node/register ./tests/*.spec.ts"
+		"test": "mocha --recursive --require ts-node/register ./test/*.spec.ts --bail",
+		"cover": "NODE_ENV=test nyc npm t"
 	},
 	"author": "",
 	"license": "ISC",
@@ -24,6 +25,7 @@
 		"chai": "^4.1.2",
 		"clean-webpack-plugin": "^0.1.19",
 		"css-loader": "^0.28.11",
+		"istanbul": "^0.4.5",
 		"mini-css-extract-plugin": "^0.4.0",
 		"mocha": "^5.2.0",
 		"node-sass": "^4.9.0",
@@ -36,5 +38,25 @@
 		"webpack": "^4.12.0",
 		"webpack-cli": "^3.0.3",
 		"webpack-manifest-plugin": "^2.0.3"
+	},
+	"nyc": {
+		"include": [
+			"app/*.ts",
+			"app/**/*.ts"
+		],
+		"exclude": [
+			"typings"
+		],
+		"extension": [
+			".ts"
+		],
+		"require": [
+			"ts-node/register"
+		],
+		"reporter": [
+			"json",
+			"html"
+		],
+		"all": true
 	}
 }

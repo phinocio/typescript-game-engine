@@ -1,11 +1,23 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../Config/Config';
 import GeometricShape from './GeometricShape';
 
+/**
+ * @class Circle
+ * @param {radius} - Radius of the Circle.
+ */
 class Circle extends GeometricShape
 {
 
 	public radius: number;
 
+	/**
+	 *
+	 * @param {CanvasRenderingContext2D} context - The context of the current scene's canvas.
+	 * @param {number} x - The X position of the Circle.
+	 * @param {number} y - The Y position of the Circle.
+	 * @param {number} radius - The Radius of the Circle.
+	 * @param {string} strokeStyle - StrokeStyle of the Circle.
+	 */
 	constructor(
 		context: CanvasRenderingContext2D,
 		x: number,
@@ -47,6 +59,11 @@ class Circle extends GeometricShape
 		this.vel.y = 0;
 	}
 
+	/**
+	 * Checks if the circle is at the bounds of the canvas, overriding the parent method.
+	 * @Override
+	 * @returns {void}
+	 */
 	protected CheckBounds(): void
 	{
 		if (this.pos.y + this.radius < 0)
