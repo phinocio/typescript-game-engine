@@ -34,12 +34,12 @@ abstract class Scene
 		}
 	}
 
-	public ClearCanvas(): void
+	public clearCanvas(): void
 	{
 		this.ctx!.clearRect(0, 0, this.width, this.height);
 	}
 
-	public DrawCanvas(): void
+	public drawCanvas(): void
 	{
 		this.canvas.id = this.sceneName;
 		this.canvas.height = this.height;
@@ -47,8 +47,8 @@ abstract class Scene
 		document.body.appendChild(this.canvas);
 	}
 
-	public abstract Render(): void;
-	public abstract Update(): void;
+	public abstract render(): void;
+	public abstract update(): void;
 }
 
 export default Scene;

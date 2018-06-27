@@ -19,56 +19,56 @@ class Engine
 	constructor()
 	{
 		this.running = true;
-		this.input = Input.GetInstance	();
+		this.input = Input.GetInstance();
 	}
 
 	/**
 	 * Loads a scene, destroying the current scene in the process if it exists.
 	 * @param scene - The scene to load.
 	 */
-	public LoadScene(scene: Scene): void
+	public loadScene(scene: Scene): void
 	{
 		if (typeof this.currentScene !== 'undefined')
 		{
-			this.Destroy(this.currentScene);
+			this.destroy(this.currentScene);
 		}
 
 		this.currentScene = scene;
-		this.currentScene.DrawCanvas();
+		this.currentScene.drawCanvas();
 	}
 
-	public GameLoop(): void {
+	public gameLoop(): void {
 		if (this.running) {
-			requestAnimationFrame(() => this.GameLoop());
-			this.currentScene.ClearCanvas();
-			this.Input();
-			this.Update();
-			this.Render();
+			requestAnimationFrame(() => this.gameLoop());
+			this.currentScene.clearCanvas();
+			this.getInput();
+			this.update();
+			this.render();
 		} else {
-			this.Input(); // If the game is paused, still check for input, do be able to unpause for example.
+			this.getInput(); // If the game is paused, still check for input, do be able to unpause for example.
 		}
 	}
 
-	private Input(): void
+	private getInput(): void
 	{
 		this.input.GetInput();
 	}
 
-	private Render(): void
+	private render(): void
 	{
-		this.currentScene.Render();
+		this.currentScene.render();
 	}
 
-	private Update(): void
+	private update(): void
 	{
-		this.currentScene.Update();
+		this.currentScene.update();
 	}
 
 	/**
 	 * Removes the old scene from the DOM when LoadScene() is called.
 	 * @param scene - The scene to remove from the DOM.
 	 */
-	private Destroy(scene: Scene): void
+	private destroy(scene: Scene): void
 	{
 		const scn = document.getElementById(scene.sceneName);
 		if (scn !== null)

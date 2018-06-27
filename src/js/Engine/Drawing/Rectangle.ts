@@ -1,20 +1,30 @@
+import Vector2D from '../Geometry/Vector2D';
 import GeometricShape from './GeometricShape';
 
 class Rectangle extends GeometricShape
 {
+
+	public acc: Vector2D;
+	public pos: Vector2D;
+	public vel: Vector2D;
+
+	public height: number;
+	public width: number;
+
 	constructor(
 		context: CanvasRenderingContext2D,
-		x: number,
-		y: number,
+		acc: Vector2D,
+		pos: Vector2D,
+		vel: Vector2D,
 		width: number,
 		height: number,
 		strokeStyle?: string)
 	{
 		super(context);
 
-		this.pos.x = x;
-		this.pos.y = y;
-		this.speed = 5;
+		this.acc = acc;
+		this.pos = pos;
+		this.vel = vel;
 		this.width = width;
 		this.height = height;
 
@@ -24,25 +34,30 @@ class Rectangle extends GeometricShape
 		}
 	}
 
-	public Render(): void
+	public render(): void
 	{
 		this.ctx.save();
 		this.ctx.beginPath();
 		this.ctx.strokeStyle = this.strokeStyle;
-		this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
+		this.ctx.rect(this.pos.getX(), this.pos.getY(), this.width, this.height);
 		this.ctx.closePath();
 		this.ctx.stroke();
 		this.ctx.restore();
 	}
 
-	public Update(): void
+	public update(): void
 	{
-		super.GetInput();
-		super.CheckBounds();
-		this.pos.x += this.vel.x;
-		this.pos.y += this.vel.y;
-		this.vel.x = 0;
-		this.vel.y = 0;
+		this.getInput();
+		super.checkBounds();
+		// this.pos.x += this.vel.x;
+		// this.pos.y += this.vel.y;
+		// this.vel.x = 0;
+		// this.vel.y = 0;
+	}
+
+	public getInput(): void
+	{
+
 	}
 }
 

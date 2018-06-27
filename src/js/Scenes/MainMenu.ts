@@ -1,13 +1,13 @@
 import Rectangle from '../Engine/Drawing/Rectangle';
+import Vector2D from '../Engine/Geometry/Vector2D';
 import Scene from './Scene';
 
 /**
  * @class MainMenu
- * @param {Input} input - The Input singleton to react to specfiic input options.
  */
 class MainMenu extends Scene
 {
-	private c = new Rectangle(this.ctx!, 50, 50, 30, 30, 'blue');
+	private c = new Rectangle(this.ctx!, new Vector2D(0, 0), new Vector2D(0, 0), new Vector2D(0, 0), 30, 30, 'blue');
 
 	/**
 	 * @constructor
@@ -17,13 +17,13 @@ class MainMenu extends Scene
 		super('MainMenu');
 	}
 
-	public Update(): void
+	public update(): void
 	{
-		this.c.Update();
+		this.c.update();
 	}
 
-	public Render(): void {
-		this.c.Render();
+	public render(): void {
+		this.c.render();
 	}
 }
 
